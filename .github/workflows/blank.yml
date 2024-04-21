@@ -1,4 +1,4 @@
-name: dotnet package
+name: .NET 8 CI
 
 on: [push]
 
@@ -6,9 +6,13 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    name: .NET 8 Application
     steps:
-        - name: Setup .NET 8.x
+        - uses: actions/checkout@v3
+        - name: Setup dotnet
           uses: actions/setup-dotnet@v3
-        - with:
+          with:
         # Semantic version range syntax or exact version of a dotnet version
-            dotnet-version: '8.x'
+            dotnet-version: '8.0.101'
+        - run: dotnet build
+        - run: dotnet test
